@@ -1,5 +1,6 @@
 #ifndef CONTABANCARIA_H
 #define CONTABANCARIA_H
+#include "Cliente.h"
 
 typedef enum{
     CORRENTE,
@@ -8,29 +9,24 @@ typedef enum{
 
 typedef struct
 {
-    int numero, anoabertura;
+    int numeroconta, anoabertura;
     TipoConta tipo;
     double saldo;
-    char nome[60];
-    char cpf[15];
+    Cliente clt;
 }ContaBancaria;
 
-void Inicializa(ContaBancaria* conta, char *nome, char *cpf, TipoConta tipo, int numero, double saldo, int anoabertura);
+void InicializaBanco(ContaBancaria* conta, int numeroconta, double saldo, int anoabertura, TipoConta tipo);
 void Deposito(ContaBancaria* conta, double valor);
 void Saque(ContaBancaria* conta, double valor);
 void Extrato(ContaBancaria* conta);
 void Emprestimo(ContaBancaria* conta);
 
-char* getNome(ContaBancaria* conta);
-char* getCpf(ContaBancaria* conta);
-int getNumero(ContaBancaria* conta);
+int getNumeroconta(ContaBancaria* conta);
 TipoConta getTipo(ContaBancaria* conta);
 int getAno(ContaBancaria* conta);
 double getSaldo(ContaBancaria* conta);
 
-void setNome(ContaBancaria* conta, char *nome);
-void setCpf(ContaBancaria* conta, char *cpf);
-void setNumero(ContaBancaria* conta, int numero);
+void setNumeroconta(ContaBancaria* conta, int numeroconta);
 void setTipo(ContaBancaria* conta, TipoConta tipo);
 void setAno(ContaBancaria* conta, int ano);
 void setSaldo(ContaBancaria* conta, double saldo);

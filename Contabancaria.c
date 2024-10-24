@@ -3,15 +3,12 @@
 #include <string.h>
 #include "Contabancaria.h"
 
-void Inicializa(ContaBancaria* conta, char *nome, char *cpf, TipoConta tipo, int numero, double saldo, int anoabertura){
-    strcpy(conta->nome, nome);
-    strcpy(conta->cpf, cpf);
-    conta->numero = numero;
+void InicializaBanco(ContaBancaria* conta, int numeroconta, double saldo, int anoabertura, TipoConta tipo){
+    conta->numeroconta = numeroconta;
     conta->saldo = saldo;
     conta->anoabertura = anoabertura;
     conta->tipo = tipo;
 }
-
 void Deposito(ContaBancaria* conta, double valor){
     conta->saldo += valor;
 }
@@ -20,11 +17,9 @@ void Saque(ContaBancaria* conta, double valor){
 }
 void Extrato(ContaBancaria* conta){
     printf("\nExtrato Bancario:\n\n");
-    printf("Nome: %s\n", getNome(conta));
-    printf("CPF: %s\n", getCpf(conta));
-    printf("Numero da conta: %d\n", getNumero(conta));
+    printf("Numero da conta: %d\n", getNumeroconta(conta));
     printf("Ano de abertura: %d\n", getAno(conta));
-    printf("Saldo atual: R$ %.2lf\n", getSaldo(conta));
+    printf("Saldo atual: R$%.2lf\n", getSaldo(conta));
     printf("Tipo da conta: %s\n", (conta->tipo == CORRENTE) ? "Corrente" : "Poupanca");
 }
 void Emprestimo(ContaBancaria* conta){
@@ -33,20 +28,14 @@ void Emprestimo(ContaBancaria* conta){
     scanf("%d", &dataAtual);
     int difEm = abs(dataAtual - conta->anoabertura);
     if (difEm >= 5){
-        printf("Você tem direito a emprestimo!\n");
+        printf("Voce tem direito a emprestimo!\n");
     } else{
         printf("Ainda nao eh possivel fazer emprestimo!\n");
     }
 }
 
-int getNumero(ContaBancaria* conta){
-    return conta->numero;
-}
-char* getCpf(ContaBancaria* conta){
-    return conta->cpf;
-}
-char* getNome(ContaBancaria* conta){
-    return conta->nome;
+int getNumeroconta(ContaBancaria* conta){
+    return conta->numeroconta;
 }
 double getSaldo(ContaBancaria* conta){
     return conta->saldo;
@@ -58,17 +47,11 @@ TipoConta getTipo(ContaBancaria* conta){
     return conta->tipo;
 }
 
-void setNome(ContaBancaria* conta, char *nome){
-    strcpy(conta->nome, nome);
-}
 void setAno(ContaBancaria* conta, int ano){
     conta->anoabertura = ano;
 }
-void setCpf(ContaBancaria* conta, char *cpf){
-    strcpy(conta->cpf, cpf);
-}
-void setNumero(ContaBancaria* conta, int numero){
-    conta->numero = numero;
+void setNumeroconta(ContaBancaria* conta, int numeroconta){
+    conta->numeroconta = numeroconta;
 }
 void setSaldo(ContaBancaria* conta, double saldo){
     conta->saldo = saldo;
